@@ -11,16 +11,10 @@ class Team(models.Model):
         return self.name
 
 
-class Human(models.Model):
+class Member(models.Model):
     first_name = models.CharField(max_length=60)
     last_name = models.CharField(max_length=60)
-    team = models.ForeignKey(
-        Team,
-        related_name="humans",
-        on_delete=models.SET_NULL,
-        null=True,
-        blank=True,
-    )
+    teams = models.ManyToManyField(Team, related_name="members", blank=True)
 
     class Meta:
         ordering = ["first_name", "last_name"]

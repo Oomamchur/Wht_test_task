@@ -1,3 +1,6 @@
 from django.contrib import admin
 
-# Register your models here.
+from management.models import Member, Team
+
+admin.site.register(Member)
+admin.site.register(Team)
