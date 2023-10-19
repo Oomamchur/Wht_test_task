@@ -1,11 +1,11 @@
 from rest_framework import viewsets
 
-from management.models import Team, Human
+from management.models import Team, Member
 from management.serializers import (
     TeamSerializer,
+    MemberSerializer,
+    MemberListSerializer,
     TeamListSerializer,
-    HumanSerializer,
-    HumanListSerializer,
 )
 
 
@@ -14,16 +14,16 @@ class TeamViewSet(viewsets.ModelViewSet):
     serializer_class = TeamSerializer
 
     def get_serializer_class(self):
-        if self.action == "list":
+        if self.action in ["list", "retrieve"]:
             return TeamListSerializer
         return TeamSerializer
 
 
-class HumanViewSet(viewsets.ModelViewSet):
-    queryset = Human.objects.all()
-    serializer_class = HumanSerializer
+class MemberViewSet(viewsets.ModelViewSet):
+    queryset = Member.objects.all()
+    serializer_class = MemberSerializer
 
     def get_serializer_class(self):
-        if self.action == "list":
-            return HumanListSerializer
-        return HumanSerializer
+        if self.action in ["list", "retrieve"]:
+            return MemberListSerializer
+        return MemberSerializer
