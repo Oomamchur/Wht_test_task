@@ -10,7 +10,7 @@ from management.serializers import (
 
 
 class TeamViewSet(viewsets.ModelViewSet):
-    queryset = Team.objects.all()
+    queryset = Team.objects.prefetch_related("members")
     serializer_class = TeamSerializer
 
     def get_serializer_class(self):
@@ -20,7 +20,7 @@ class TeamViewSet(viewsets.ModelViewSet):
 
 
 class MemberViewSet(viewsets.ModelViewSet):
-    queryset = Member.objects.all()
+    queryset = Member.objects.prefetch_related("teams")
     serializer_class = MemberSerializer
 
     def get_serializer_class(self):
