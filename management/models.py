@@ -2,7 +2,7 @@ from django.db import models
 
 
 class Team(models.Model):
-    name = models.CharField(max_length=60)
+    name = models.CharField(max_length=60, unique=True)
 
     class Meta:
         ordering = ["name"]
@@ -14,6 +14,7 @@ class Team(models.Model):
 class Member(models.Model):
     first_name = models.CharField(max_length=60)
     last_name = models.CharField(max_length=60)
+    email = models.EmailField(unique=True)
     teams = models.ManyToManyField(Team, related_name="members", blank=True)
 
     class Meta:
