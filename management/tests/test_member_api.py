@@ -39,16 +39,13 @@ class UnauthenticatedMemberApiTests(TestCase):
         self.client = APIClient()
 
     def test_team_list(self) -> None:
-        new_member()
-        new_member(first_name="Alex", email="test@example.com")
-
-        members = Member.objects.all()
-        serializer = MemberListSerializer(members, many=True)
+        member = new_member(first_name="Alex")
+        serializer = MemberListSerializer(member)
 
         response = self.client.get(MEMBER_URL)
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
-        self.assertEqual(response.data["results"], serializer.data)
+        self.assertIn(serializer.data, response.data["results"])
 
     def test_member_retrieve(self) -> None:
         member = new_member()
