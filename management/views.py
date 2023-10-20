@@ -4,6 +4,7 @@ from rest_framework import viewsets
 
 from management.models import Team, Member
 from management.pagination import MemberPagination
+from management.permissions import IsAdminOrReadOnly
 from management.serializers import (
     TeamSerializer,
     TeamListSerializer,
@@ -16,6 +17,7 @@ from management.serializers import (
 class TeamViewSet(viewsets.ModelViewSet):
     queryset = Team.objects.prefetch_related("members")
     serializer_class = TeamSerializer
+    permission_classes = (IsAdminOrReadOnly,)
 
     def get_serializer_class(self):
         if self.action in ["list", "retrieve"]:
@@ -48,6 +50,7 @@ class MemberViewSet(viewsets.ModelViewSet):
     queryset = Member.objects.prefetch_related("teams")
     serializer_class = MemberSerializer
     pagination_class = MemberPagination
+    permission_classes = (IsAdminOrReadOnly,)
 
     def get_serializer_class(self):
         if self.action == "list":
