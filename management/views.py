@@ -36,7 +36,7 @@ class TeamViewSet(viewsets.ModelViewSet):
     @extend_schema(
         parameters=[
             OpenApiParameter(
-                "source",
+                "name",
                 type=OpenApiTypes.STR,
                 description="Filter by name(ex. ?name=Lak)",
             ),
