@@ -63,7 +63,6 @@ class MemberViewSet(viewsets.ModelViewSet):
         queryset = self.queryset
         first_name = self.request.query_params.get("first_name")
         last_name = self.request.query_params.get("last_name")
-        team = self.request.query_params.get("team")
 
         if first_name:
             queryset = queryset.filter(first_name__icontains=first_name)
