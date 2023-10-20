@@ -20,12 +20,20 @@ class TeamListSerializer(TeamSerializer):
 class MemberSerializer(serializers.ModelSerializer):
     class Meta:
         model = Member
-        fields = ("id", "first_name", "last_name", "teams")
+        fields = ("id", "first_name", "last_name", "email", "teams")
 
 
 class MemberListSerializer(MemberSerializer):
-    teams = TeamSerializer(many=True, read_only=True)
+    teams = serializers.StringRelatedField(many=True)
 
     class Meta:
         model = Member
         fields = ("id", "first_name", "last_name", "teams")
+
+
+class MemberDetailSerializer(MemberSerializer):
+    teams = TeamSerializer(many=True, read_only=True)
+
+    class Meta:
+        model = Member
+        fields = ("id", "first_name", "last_name", "email", "teams")
