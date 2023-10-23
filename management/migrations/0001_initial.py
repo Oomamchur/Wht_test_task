@@ -4,34 +4,55 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='Team',
+            name="Team",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=60, unique=True)),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=60, unique=True)),
             ],
             options={
-                'ordering': ['name'],
+                "ordering": ["name"],
             },
         ),
         migrations.CreateModel(
-            name='Member',
+            name="Member",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('first_name', models.CharField(max_length=60)),
-                ('last_name', models.CharField(max_length=60)),
-                ('email', models.EmailField(max_length=254, unique=True)),
-                ('teams', models.ManyToManyField(blank=True, related_name='members', to='management.team')),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("first_name", models.CharField(max_length=60)),
+                ("last_name", models.CharField(max_length=60)),
+                ("email", models.EmailField(max_length=254, unique=True)),
+                (
+                    "teams",
+                    models.ManyToManyField(
+                        blank=True,
+                        related_name="members",
+                        to="management.team",
+                    ),
+                ),
             ],
             options={
-                'ordering': ['first_name', 'last_name'],
+                "ordering": ["first_name", "last_name"],
             },
         ),
     ]

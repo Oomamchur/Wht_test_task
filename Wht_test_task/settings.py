@@ -49,7 +49,7 @@ INSTALLED_APPS = [
     "debug_toolbar",
     "drf_spectacular",
     "management",
-    "user"
+    "user",
 ]
 
 MIDDLEWARE = [
@@ -89,8 +89,12 @@ WSGI_APPLICATION = "Wht_test_task.wsgi.application"
 
 DATABASES = {
     "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
+        "ENGINE": "django.db.backends.postgresql",
+        "HOST": os.environ["POSTGRES_HOST"],
+        "NAME": os.environ["POSTGRES_NAME"],
+        "USER": os.environ["POSTGRES_USER"],
+        "PASSWORD": os.environ["POSTGRES_PASSWORD"],
+        "PORT": os.environ["POSTGRES_PORT"],
     }
 }
 
